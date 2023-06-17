@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((message) => {
   div.style.position = "fixed";
   div.style.borderRadius = "25px";
   div.style.padding = "15px";
-  div.style.gap = "15px";
+  div.style.gap = "10px";
   div.style.top = "10px";
   div.style.right = "10px";
   div.style.fontFamily = "monospace";
@@ -33,6 +33,7 @@ chrome.runtime.onMessage.addListener((message) => {
   image.src =
     "https://github.com/PaulAshraf/chrome-cloudflare/blob/master/icon.jpg?raw=true";
   image.style.height = "25px";
+  image.style.borderRadius = "5px";
   image.alt = "cloudflare";
 
   const span = document.createElement("span");
