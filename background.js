@@ -19,28 +19,25 @@ function getCloudflareData(headers) {
 
   const cfData = { age, cacheStatus };
 
-  console.log(cfData);
   return cfData;
 }
 
 chrome.webRequest.onHeadersReceived.addListener(
   (details) => {
     const responseHeaders = details?.responseHeaders;
-    if (isCloudflareHTML(responseHeaders)) {
-      console.log(details);
-      console.log(isCloudflareHTML(responseHeaders));
-      const data = getCloudflareData(responseHeaders);
+    if (!isCloudflareHTML(responseHeaders)) return;
 
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
-          if (tabs[0].id === tabId && changeInfo.status == "complete") {
-            chrome.tabs.onUpdated.removeListener(listener);
+    const data = getCloudflareData(responseHeaders);
 
-            chrome.tabs.sendMessage(tabs[0].id, { data });
-          }
-        });
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
+        if (tabs[0].id === tabId && changeInfo.status == "complete") {
+          chrome.tabs.onUpdated.removeListener(listener);
+
+          chrome.tabs.sendMessage(tabs[0].id, { data });
+        }
       });
-    }
+    });
   },
   { urls: ["<all_urls>"] },
   ["responseHeaders"]
