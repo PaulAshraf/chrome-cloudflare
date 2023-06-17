@@ -16,8 +16,6 @@ git clone https://github.com/PaulAshraf/chrome-cloudflare.git
 
 4. Click the LOAD UNPACKED button and select the extension directory.
 
-![Loading the extension in chrome](https://github.com/PaulAshraf/chrome-cloudflare/blob/master/extention.png?raw=true?raw=true)
-
 ---
 
 Paul Ashraf © 2023
